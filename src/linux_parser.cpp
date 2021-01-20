@@ -156,7 +156,7 @@ vector<string> LinuxParser::CpuUtilization() {
       float spent_time = uptime - starttime / sysconf(_SC_CLK_TCK);
       float cpu_usage =0;
       if (spent_time>0){
-        cpu_usage = 100 *  total_time / spent_time;
+        cpu_usage = total_time / spent_time;
       }
       cpu_usages.push_back(std::to_string(cpu_usage));
     }
