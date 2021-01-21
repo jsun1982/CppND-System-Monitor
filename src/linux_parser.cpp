@@ -10,8 +10,6 @@ using std::string;
 using std::to_string;
 using std::vector;
 using namespace Format;
-static long cpu_last_sum{0};
-static long cpu_last_idle{0};
 
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::OperatingSystem() {
@@ -108,18 +106,6 @@ long LinuxParser::UpTime() {
   return stol(uptime);
 }
 
-// TODO: Read and return the number of jiffies for the system
-long LinuxParser::Jiffies() { return 0; }
-
-// TODO: Read and return the number of active jiffies for a PID
-long LinuxParser::ActiveJiffies(int pid[[maybe_unused]]) { return 0; }
-
-// TODO: Read and return the number of active jiffies for the system
-long LinuxParser::ActiveJiffies() { return 0; }
-
-// TODO: Read and return the number of idle jiffies for the system
-long LinuxParser::IdleJiffies() { return 0; }
-
 // TODO: Read and return CPU utilization
 // check following ULR for implemtation details
 // https://stackoverflow.com/questions/16726779/how-do-i-get-the-total-cpu-usage-of-an-application-from-proc-pid-stat/16736599#16736599
@@ -162,36 +148,6 @@ vector<string> LinuxParser::CpuUtilization() {
     }
   }
   return cpu_usages;
-}
-
-// https://www.idnt.net/en-GB/kb/941772
-float LinuxParser::CPUUtilization() {
-  string line;
-  string key;
-  int i{0};
-  vector<long> cpu;
-  std::ifstream filestream(kProcDirectory + kStatFilename);
-  if (filestream.is_open()) {
-    std::getline(filestream, line);
-    std::istringstream linestream(line);
-    long cpu_sum{0};
-    while (linestream) {
-      linestream >> key;
-      i++;
-      if (i != 1) {
-        cpu.push_back(stol(key));
-        cpu_sum += stol(key);
-      }
-    }
-    long cpu_delta = cpu_sum - cpu_last_sum;
-    long cpu_idle = cpu[4] - cpu_last_idle;
-    long cpu_used = cpu_delta - cpu_idle;
-    long cpu_usage = 100 * float(cpu_used) / float(cpu_delta);
-    cpu_last_sum = cpu_sum;
-    cpu_last_idle = cpu[4];
-    return cpu_usage;
-  }
-  return 0;
 }
 
 // TODO: Read and return the total number of processes

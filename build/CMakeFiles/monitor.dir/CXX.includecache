@@ -18,6 +18,20 @@ regex
 string
 -
 
+../include/process.h
+string
+-
+
+../include/processor.h
+
+../include/system.h
+string
+-
+vector
+-
+process.h
+../include/process.h
+processor.h
 ../include/processor.h
 
 /home/workspace/CppND-System-Monitor/src/linux_parser.cpp
@@ -34,9 +48,45 @@ vector
 format.h
 /home/workspace/CppND-System-Monitor/src/format.h
 
+/home/workspace/CppND-System-Monitor/src/process.cpp
+unistd.h
+-
+cctype
+-
+sstream
+-
+string
+-
+vector
+-
+linux_parser.h
+/home/workspace/CppND-System-Monitor/src/linux_parser.h
+process.h
+/home/workspace/CppND-System-Monitor/src/process.h
+
 /home/workspace/CppND-System-Monitor/src/processor.cpp
 processor.h
 /home/workspace/CppND-System-Monitor/src/processor.h
 linux_parser.h
 /home/workspace/CppND-System-Monitor/src/linux_parser.h
+
+/home/workspace/CppND-System-Monitor/src/system.cpp
+unistd.h
+-
+cstddef
+-
+set
+-
+string
+-
+vector
+-
+linux_parser.h
+/home/workspace/CppND-System-Monitor/src/linux_parser.h
+process.h
+/home/workspace/CppND-System-Monitor/src/process.h
+processor.h
+/home/workspace/CppND-System-Monitor/src/processor.h
+system.h
+/home/workspace/CppND-System-Monitor/src/system.h
 
